@@ -1,0 +1,36 @@
+
+// https://www.geeksforgeeks.org/find-position-element-sorted-array-infinite-numbers/
+
+public class PosOfAnEleInInfiniteArray {
+
+	public int search(int[] arr, int target) {
+		
+		int start = 0;
+		int end = 1;
+		
+		// condition for the target to lie in the range
+		// keep on increasing the array twice the pervious size
+		while(target > arr[end]) {
+			int newStart = end + 1;
+			end = end + (end - start + 1)* 2;
+			start = newStart;
+		}
+		
+		return BInarySearch(arr, target, start, end);
+	}
+
+	private int BInarySearch(int[] arr, int target, int start, int end) {
+		while(start <= end) {
+			int mid = start + (end - start)/2;
+			
+			if(target < arr[mid]) {
+				end = mid -1;
+			} else if (target > arr[mid]) {
+				start = mid + 1;
+			} else {
+				return mid;
+			}
+		}
+		return -1;
+	}
+}
