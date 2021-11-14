@@ -1,0 +1,73 @@
+// https://leetcode.com/problems/find-in-mountain-array/
+/**
+ * // This is MountainArray's API interface.
+ * // You should not implement it, or speculate about its implementation
+ * interface MountainArray {
+ *     public int get(int index) {}
+ *     public int length() {}
+ * }
+ */
+ 
+class Solution {
+    public int findInMountainArray(int target, MountainArray mountainArr) {
+        // find the peak element in the array, so that we can divide the given
+		// array into two halves. One will be ascending order and the other
+		// will be in descending order.
+		int peak = findPeakIndex(mountainArr);
+		int firstSearch = searchAgnosticallyBS(mountainArr, target, 0, peak);
+		if (firstSearch != -1) {
+			return firstSearch;
+		}
+		// not found, search in the other part of the array
+		return searchAgnosticallyBS(mountainArr, target, peak + 1, mountainArr.length()-1);
+    }
+    
+    private int findPeakIndex(MountainArray mountainArr) {
+
+		int start = 0;
+		int end = mountainArr.length()-1;
+
+		while (start < end) {
+			int mid = start + (end - start) / 2;
+
+			if (mountainArr.get(mid) > mountainArr.get(mid + 1)) {
+				end = mid;
+			} else {
+				start = mid + 1;
+			}
+		}
+
+		return start;
+	}
+    
+private int searchAgnosticallyBS(MountainArray mountainArr, int target, int start, int end) {
+		// find whether array is arranged in ascending or descending order
+		boolean isAsc = mountainArr.get(start) < mountainArr.get(end);
+				
+		while(start <= end) {
+			int mid = start + (end-start)/2;
+			
+			if(mountainArr.get(mid) == target) {
+				return mid;
+			}
+			
+			if(isAsc) {
+				if(target < mountainArr.get(mid)) {
+					end = mid - 1;
+				}
+				else {
+					start = mid + 1;
+				}
+			} else {
+				// decreasing order
+				if(target > mountainArr.get(mid)) {
+					end = mid- 1;
+				} else {
+					start = mid + 1;
+				}
+			}
+		}
+    return -1;
+
+	}
+}
