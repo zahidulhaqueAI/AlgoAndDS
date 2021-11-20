@@ -1,0 +1,33 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class FindDisappearedNumbers {
+
+public List<Integer> findDisappNumbers(int[] nums) {
+        
+        int i = 0;
+               
+        while(i < nums.length) {
+            int index = nums[i] - 1;
+            
+            if(nums[i] != nums[index]) {
+                swap(nums, i, index);
+            } else { 
+                i++;
+            }
+        }// while
+        List<Integer> missingList = new ArrayList<>();
+        for(int index = 0; index < nums.length; index++) {
+            if(nums[index] != index+1){
+                missingList.add(index+1);
+            }
+        }
+        return missingList;
+    }// method
+    
+    private void swap(int[] arr, int first, int second) {
+        int temp = arr[first];
+        arr[first] = arr[second];
+        arr[second] = temp;
+    }
+}
