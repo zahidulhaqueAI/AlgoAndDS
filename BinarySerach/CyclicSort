@@ -1,0 +1,25 @@
+public class CyclicSort {
+	
+	public void sort(int[] arr) {
+		int i = 0;
+		while(i < arr.length) {
+			// get the index so that based on the index will replace the element
+			// at its proper index
+			int index = arr[i] - 1;
+			
+			if(arr[i] == arr[index]) {
+				i++;
+			}else {
+				// swap the element to its proper index
+				swap(arr, i, index);
+			}
+		}
+	}
+
+	private void swap(int[] arr, int first, int second) {
+		int temp = arr[first];
+		arr[first] = arr[second];
+		arr[second] = temp;
+	}
+
+}
