@@ -1,0 +1,40 @@
+// https://leetcode.com/problems/find-all-duplicates-in-an-array/
+
+/*
+ * Given an integer array nums of length n where all the integers of nums are in 
+ * the range [1, n] and each integer appears once or twice, 
+ * return an array of all the integers that appears twice.
+ */
+
+public class FindAllDuplicates {
+
+	public List<Integer> findDuplicates(int[] nums) {
+		
+		int i = 0;
+		while(i < nums.length) {
+			int index = nums[i] - 1;
+			
+			if(nums[i] != nums[index]) {
+				swap(nums, i , index);
+			}
+			else {
+				i++;
+			}
+		}
+		
+		// loop through the array to find the duplicates
+		List<Integer> list = new ArrayList<>();
+		for (int j = 0; j < nums.length; j++) {
+			if(nums[j] != j+1) {
+				list.add(nums[j]);
+			}
+		}
+		return list;
+	}
+
+	private void swap(int[] nums, int first, int second) {
+		int temp = nums[first];
+		nums[first] = nums[second];
+		nums[second] = temp;
+	}
+}
