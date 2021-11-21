@@ -1,0 +1,38 @@
+
+// https://leetcode.com/problems/find-the-duplicate-number/
+/*
+ * Given an array of integers nums containing n + 1 integers where each integer 
+ * is in the range [1, n] inclusive.
+
+There is only one repeated number in nums, return this repeated number.
+ */
+
+public class FindDuplicate {
+	public int findDuplicateEle(int[] nums) {
+		
+		int i = 0;
+		while(i < nums.length) {
+			// since the range is [1, n]. Each element will have number - 1 index
+			int index = nums[i] - 1;
+			// element is not at their proper place
+			if(nums[i] != nums[index]) {
+				swap(nums, i, index);
+			} else {
+				i++;
+			}
+		}
+		// loop through the sorted index to find the duplicate index
+		for (int index = 0; index < nums.length; index++) {
+			if(nums[index] != index+1) {
+				return nums[index];
+			}
+		}
+		return nums.length;
+	}
+
+	private void swap(int[] nums, int first, int second) {
+		int temp = nums[first];
+		nums[first] = nums[second];
+		nums[second] = temp;
+	}
+}
