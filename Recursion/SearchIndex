@@ -1,0 +1,17 @@
+	public class SearchIndex {
+  public int findIndex(int[] arr, int target) {
+
+		return helperIndex(arr,target,0);
+	}
+
+	private int helperIndex(int[] arr, int target, int index) {
+		
+		if(index == arr.length) {
+			return -1;
+		}
+		if(arr[index] == target) {
+			return index;
+		}
+		return helperIndex(arr, target, index+1);
+	}
+  }
