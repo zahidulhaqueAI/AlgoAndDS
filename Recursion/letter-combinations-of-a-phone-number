@@ -1,0 +1,43 @@
+// https://leetcode.com/problems/letter-combinations-of-a-phone-number/
+Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.
+
+A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+Input: digits = "23"
+Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        if(digits.isEmpty()){
+            return new ArrayList<>();
+        }
+        return permutation(digits, "");
+    }
+    
+    private List<String> permutation(String str, String proc) {
+        // base condition
+        if(str.isEmpty()) {
+            List<String> list = new ArrayList<>();
+            list.add(proc);
+            return list;
+        }
+        
+        // get the integer value of the character
+        int digit = str.charAt(0) - '0';
+        // instantiate List to hold all the return values from the call
+        List<String> list = new ArrayList<>();
+        
+        int end = digit >= 7 ? (digit-1)*3+1 : (digit-1)*3;
+        int start = digit >= 8 ? (digit-2)*3+1 : (digit-2)*3;
+        if(digit == 9){
+            end = 26;
+        }
+        
+        // loop through each char as per the number
+        for(int i = start; i < end; i++) {
+            // convert number into its corresponding char
+            char ch = (char)('a' + i);
+            list.addAll(permutation(str.substring(1), proc+ch));
+        }
+        return list;
+    }
+}
