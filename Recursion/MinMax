@@ -1,0 +1,23 @@
+https://www.geeksforgeeks.org/recursive-programs-to-find-minimum-and-maximum-elements-of-array/
+
+
+public class MinNumber {
+
+	public int FindMin(int[] arr, int n) {
+		// base condition
+		if (n == 1) {
+			return arr[0];
+		}
+
+		return Math.min(arr[n - 1], FindMin(arr, n - 1));
+	}
+
+	public int FindMax(int[] arr, int n) {
+		// base condition
+		if(n== 1) {
+			return arr[0];
+		}
+		
+		return Math.max(arr[n-1], FindMax(arr, n-1));
+	}
+}
