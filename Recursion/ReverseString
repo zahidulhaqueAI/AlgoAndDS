@@ -1,0 +1,37 @@
+https://leetcode.com/problems/reverse-string/submissions/
+
+// Non-Recursive approach
+public class ReverseString {
+	// non recursive solution
+	public void reverseString(char[] s) {
+	int i = 0;
+    int j = s.length - 1;
+    
+    while(j > i){
+        char temp = s[i];
+        s[i] = s[j];
+        s[j] = temp;
+        
+        i++;
+        j--;
+    }
+	}
+  
+// Recursive call
+public void reverseString(char[] s) {
+  public void reverseStringRec(char[] arr) {
+		helper(arr, 0, arr.length-1);
+	}
+
+	private void helper(char[] arr, int left, int right) {
+		if(left > right) {
+			return;
+		}
+		char temp = arr[right];
+		arr[right] = arr[left];
+		arr[left] = temp;
+		
+		helper(arr, left+1, right-1);
+		
+	}
+}
