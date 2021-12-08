@@ -1,0 +1,28 @@
+https://leetcode.com/problems/fibonacci-number/submissions/
+
+class Solution {
+    public int fib(int n) {
+       	int[] arr = new int[34];
+		return helper(n, arr);   
+    }
+    
+    private int helper(int n, int[] arr) {
+		if(n==0 ){
+			return 0;
+		}
+		
+		if(n== 1) {
+			return 1;
+		}
+		
+		// formula F(N) = F(N-1) + F(N-2)
+		// first loop in the arr
+		if(arr[n] == 0) {
+			arr[n] = helper(n-1, arr) + helper(n-2, arr);
+		}
+		
+		return arr[n];
+		
+	}
+    
+}
