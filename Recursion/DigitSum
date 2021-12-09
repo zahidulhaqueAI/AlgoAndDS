@@ -1,0 +1,14 @@
+https://www.geeksforgeeks.org/sum-digit-number-using-recursion/
+Given a number, we need to find sum of its digits using recursion.
+
+public class DigitSum {
+
+	public int digitSum(int n) {
+		// base condition
+		if(n == 0) {
+			return n;
+		}
+		
+		return (n%10) + digitSum(n/10);
+	}
+}
