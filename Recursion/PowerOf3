@@ -1,0 +1,26 @@
+https://leetcode.com/problems/power-of-three/
+
+Given an integer n, return true if it is a power of three. Otherwise, return false.
+
+An integer n is a power of three, if there exists an integer x such that n == 3x.
+
+class Solution {
+    public boolean isPowerOfThree(int n) {
+        return helper(n, 0, (double) 0);
+    }
+    
+    	private boolean helper(int n, int i, Double j) {
+		// base condition
+		if (j > n || n == 0) {
+			return false;
+		}
+
+		if (n == j || n == 1) {
+			return true;
+		}
+
+		j = Math.pow(3, i + 1);
+
+		return helper(n, i + 1, j);
+	}
+}
