@@ -1,0 +1,20 @@
+public class Prime {
+
+	public void prime(int n) {
+		helper(n,2);
+	}
+
+	private void helper(int n, int i) {
+		// base condition
+		if(i > n/2) {
+			System.out.println("Not Prime");
+			return;
+		}
+		if(n%i == 0) {
+			System.out.println("IT's Prime");
+			return;
+		}
+		helper(n,i+1);
+		
+	}
+}
