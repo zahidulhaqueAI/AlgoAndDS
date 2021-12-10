@@ -1,0 +1,30 @@
+package com.zahid.mian.rec;
+
+/*
+ * https://www.geeksforgeeks.org/program-check-array-sorted-not-iterative-recursive/
+ * 
+ * Program to check if an array is sorted or not (Iterative and Recursive)
+
+Given an array of size n, write a program to check if it is sorted in ascending order or not. Equal values are allowed 
+in an array and two consecutive equal values are considered sorted.
+ */
+
+public class ArraySort {
+
+	public boolean isArraySorted(int[] arr) {
+		return helper(arr, arr.length-1, 0);
+	}
+
+	private boolean helper(int[] arr, int n, int i) {
+		// base condition
+		if (n == 0) {
+			return true;
+		}
+		
+		if(arr[i] > arr[i+1]) {
+			return false;
+		}
+
+			return helper(arr, n-1, i+1);
+	}
+}
