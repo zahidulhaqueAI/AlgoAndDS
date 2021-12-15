@@ -1,0 +1,15 @@
+// print total path from starting to end, excluding diagonal
+public class Maze {
+
+	public int count(int r, int c) {
+		// base condition
+		if (r == 1 || c == 1) {
+			return 1;
+		}
+
+		int down = count(r - 1, c);
+		int right = count(r, c - 1);
+
+		return down + right;
+	}
+}
