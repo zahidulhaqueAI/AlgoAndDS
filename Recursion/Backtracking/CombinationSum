@@ -1,0 +1,33 @@
+https://leetcode.com/problems/combination-sum/submissions/
+
+Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. 
+You may return the combinations in any order.
+
+[2,7,6,3,5,1], target = 9
+[[1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,2],[1,1,1,1,1,1,3],[1,1,1,1,1,2,2],
+[1,1,1,1,2,3],[1,1,1,1,5],[1,1,1,2,2,2],[1,1,1,3,3],[1,1,1,6],[1,1,2,2,3],
+[1,1,2,5],[1,1,7],[1,2,2,2,2],[1,2,3,3],[1,2,6],[1,3,5],[2,2,2,3],[2,2,5],
+[2,7],[3,3,3],[3,6]]
+
+public void solve(int[] arr, int target) {
+		List<List<Integer>> result = new ArrayList<>();
+		solveMe(arr,target,new ArrayList<Integer>(), result);
+		System.out.println(result.toString());
+	}
+
+	private void solveMe(int[] arr, int target, List<Integer>list, List<List<Integer>> Result) {
+
+		if(target < 0) {
+			return;
+		}
+		
+		if(target==0) {
+			Result.add(new ArrayList<>(list));
+			return;
+		}
+		for (int i = 0; i < arr.length ; i++) {
+			list.add(arr[i]);
+			solveMe(arr, target-arr[i], list, Result);
+			list.remove(list.size()-1);
+		}
+	}
