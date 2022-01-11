@@ -1,0 +1,53 @@
+https://leetcode.com/problems/combination-sum-ii/
+Given a collection of candidate numbers (candidates) and a target number (target), find all unique combinations in candidates where the candidate numbers sum to target.
+Input: candidates = [10,1,2,7,6,1,5], target = 8
+Output: 
+[
+[1,1,6],
+[1,2,5],
+[1,7],
+[2,6]
+]
+
+class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+       
+        // sort the array
+        Arrays.sort(candidates);
+        
+        // instantiate Set to hold the unique value
+        List<List<Integer>> result = new ArrayList<>();
+        
+        // helper method
+        combinationSum(candidates, 0, target, new ArrayList<Integer>(), result);
+            
+        return new ArrayList(result);
+    }
+    
+    private void combinationSum(int[] candidates, int index, int target, List<Integer> list, List<List<Integer>> result) {
+        
+
+        // base condition
+        if(target == 0) {
+            result.add(new ArrayList<>(list));
+            return;
+        }
+        
+        for(int i = index; i < candidates.length; i++ ) {
+            // look for duplicate
+            if(i > index && candidates[i] == candidates[i-1])
+                continue;
+            
+            if(candidates[i] > target)
+                break;
+            
+            // add to the set
+            list.add(candidates[i]);
+            
+            // recursive call
+            combinationSum(candidates, i + 1, target - candidates[i], list, result);
+            // backtrack
+            list.remove(list.size() - 1);
+        }
+    }
+}
