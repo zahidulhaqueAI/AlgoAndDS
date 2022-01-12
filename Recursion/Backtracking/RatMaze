@@ -1,0 +1,33 @@
+// https://www.geeksforgeeks.org/rat-in-a-maze-backtracking-2/
+
+public class RatMaze {
+
+	public void solveMaze(int[][] maze, int row, int col) {
+		Path(maze, "", 0, 0);
+	}
+
+	private void Path(int[][] maze, String proc, int row, int col) {
+		
+		// base condition
+		if(row == maze.length-1 && col == maze[0].length-1) {
+			System.out.println(proc);
+			return;
+		}
+		
+		// if obstacle present
+		if(0 == maze[row][col]) {
+			return;
+		}
+		
+		// only two directions movements are allowed i.e. FORWARD And DOWNWARD
+		// downward movement
+		if(row < maze.length-1) {
+			Path(maze,proc+"V",row+1, col);
+		}
+		
+		// horizontal movement
+		if(col < maze[0].length-1) {
+			Path(maze, proc+"H", row, col+1);
+		}
+	}
+}
